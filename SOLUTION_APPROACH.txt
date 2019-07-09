@@ -1,0 +1,25 @@
+# Solution Approach (tech design)
+
+- First, will add a rest controller for the endpoint. No specific detail is present on requirements regarding the endpoint, so "/sum" endpoint will be created.
+
+- We will receive distances, and a unit length for the result. Each distance also contains it's own unit length. Therefore, it will be created a Distance object for the domain, and a unitlength (which can be either yards or meters).
+- Each unit length (Meters, Yards) should have a convert method, common to both but with specific implementation (abstract class should be used)
+
+- In the controller, we should consume json payload with the following data:
+{
+	"resultMetric": "meters",
+	"distances": [
+		{
+			"distanceNumber" : 3,
+			"unitLength": "yards"
+		},
+		{
+			"distanceNumber" : 5,
+			"unitLength": "meters"
+		}
+	]
+}
+
+- Therefore, we need to add a converter to parse the received Dto content into our domain format.
+- Then, we add a service to be responsible of, with the list of Distances, sum everything and return the correct (converted) summed distance.
+- Lastly, unit tests are added to cover the code.
